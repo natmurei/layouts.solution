@@ -2,4 +2,9 @@
     <string name="app_name">natasha solution</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_add_note">AddNoteActivity</string>
+    <string name="title_activity_view_note">ViewNote</string>
+    <string name="view_note">Lorem ipsum dolor sit amet,consectetur adipisicing
+        elit.Animi ex in natus officiis quasi,repellat? Aliquam debitis,
+        doloremque enim esse excepturi,porro quibusdam ratione rem
+        rerum sint tempore,vitae voluptatibus.</string>
 </resources>

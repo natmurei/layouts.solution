@@ -42,7 +42,8 @@
         android:hint="Note"
         android:id="@+id/etNote"
         android:lines="7"
-        android:gravity="top|left"
+        android:gravity=""
+        android:background="@drawable/textview_border"
         />
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,10 +76,13 @@
 </LinearLayout>
 
     <Button
+        android:textColor="@android:color/white"
+        android:background="@drawable/bj_button_pink"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Save"
         android:id="@+id/btnSave"
+
         />
 
 </LinearLayout>

@@ -6,13 +6,26 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.natashasolution.adapter.NotesAdapter;
+import com.example.natashasolution.database.DatabaseHelper;
+import com.example.natashasolution.database.Note;
 
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity {
+    ListView listView;
+    List<Note> noteList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +40,55 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getBaseContext(),AddNoteActivity.class));
             }
         });
-        TextView tvHello= findViewById(R.id.tvHello);
-        tvHello.setText("Tomorrow is you me");
+
+        listView= findViewById(R.id.lvListView);
+    }
+
+
+    private void displayNote(){
+        DatabaseHelper databaseHelper =new DatabaseHelper(getBaseContext(),"notes",null,1);
+        noteList= new ArrayList<Note>();
+        noteList = databaseHelper.getNotes();
+        Log.d("mynotes","My database has" + noteList.size()+" notes");
+        final NotesAdapter notesAdapter = new NotesAdapter(getBaseContext(),0,noteList);
+        listView.setAdapter(notesAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Note clickedNote=noteList.get(position);
+                Intent intent=new Intent(getBaseContext(),ViewNote.class);
+                intent.putExtra("NOTE-ID",clickedNote.getId());
+                startActivity(intent);
+
+
+                }
+        });
+
+
+
+
+    }
+
+    private  void displayNames(){
+        List<String>namesList= new ArrayList<String>();
+        namesList.add("Jowie Wahome");
+        namesList.add("Natasha Nasambu");
+        namesList.add("Samantha Cherop");
+        namesList.add("Marion Naliaka");
+        namesList.add("Carlos Murray");
+        namesList.add("Jamas Nandako");
+        namesList.add("Charlotte Tendai");
+        namesList.add("Junaid Khan");
+
+        ArrayAdapter<String>arrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,namesList);
+        listView.setAdapter(arrayAdapter);
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        displayNote();
+//        displayNames();
     }
 
     @Override
