@@ -45,6 +45,11 @@
         android:gravity=""
         android:background="@drawable/textview_border"
         />
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="373dp"
+        android:layout_height="158dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

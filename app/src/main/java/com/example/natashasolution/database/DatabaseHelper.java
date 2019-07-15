@@ -24,7 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("ALTER TABLE notes ADD COLUMN images INTEGER DEFAULT 0");
     }
 
     public long addNote(Note note){
@@ -40,6 +40,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<Note>notesList=new ArrayList<Note>();
         String query="SELECT * FROM notes";
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+          onUpgrade(sqLiteDatabase,0,1);
+
         Cursor cursor = sqLiteDatabase.rawQuery(query,null);
         if (cursor.moveToFirst()==true) {
             do{
@@ -70,7 +72,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDataBase.close();
         return note;
    }
-public void deleteNotes(int id){
+    public void deleteNotes(int id){
         SQLiteDatabase sqLiteDatabase=this.getReadableDatabase();
         String tableName="notes";
         String whereClause="id=?";
@@ -78,4 +80,14 @@ public void deleteNotes(int id){
 };
   sqLiteDatabase.delete(tableName,whereClause,whereArgs);
    }
+    public int updateNotes(Note note){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("title",note.getTitle());
+        contentValues.put("noteText",note.getNoteText());
+        String tableName="notes";
+        String whereClause="id=?";
+        String []whereArgs=new String[]{String.valueOf(note.getId())};
+        return sqLiteDatabase.update("notes", contentValues, whereClause, whereArgs);
+    }
 }

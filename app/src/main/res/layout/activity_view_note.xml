@@ -119,7 +119,8 @@
         android:orientation="horizontal">
 
     <Button
-        android:layout_width="match_parent"
+        android:id="@+id/btnEdit"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_mode_edit_pink_300_24dp"
         android:layout_marginTop="700dp"
@@ -127,10 +128,10 @@
         android:text="Edit"/>
     <Button
         android:id="@+id/btnDelete"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_delete_forever_pink_300_24dp"
-        android:layout_marginTop="700dp"
+        android:layout_marginTop="400dp"
         android:layout_marginLeft="230dp"
         android:text="Delete"/>
     </LinearLayout>
